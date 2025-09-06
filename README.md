@@ -1,5 +1,5 @@
 
-# Assessment — Data Science(Intern)
+# Assessment — Data Science
 
 This project solves the Junior Data Scientist assessment by Vanilla Steel, consisting of two main tasks:
 
