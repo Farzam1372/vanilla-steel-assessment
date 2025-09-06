@@ -85,9 +85,3 @@ pip install -r requirements.txt
 
 - `output/inventory_dataset.csv`
 - `output/top3.csv`
-
----
-
-## Author
-
-Farzam Nazari - 09/06/2025
