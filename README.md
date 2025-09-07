@@ -1,7 +1,7 @@
 
 # Assessment — Data Science
 
-This project solves the Junior Data Scientist assessment by Vanilla Steel, consisting of two main tasks:
+This project solves the Junior Data Scientist assessment, consisting of two main tasks:
 
 ---
 
