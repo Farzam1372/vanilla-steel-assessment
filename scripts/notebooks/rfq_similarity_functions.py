@@ -10,14 +10,14 @@ def prepare_rfq_reference(df_rfq: pd.DataFrame, df_ref: pd.DataFrame) -> pd.Data
     df_rfq = df_rfq.copy()
     df_ref = df_ref.copy()
 
-    # === Normalize grade keys (lowercase, strip)
+    # Normalize grade keys (lowercase, strip)
     df_rfq["grade_clean"] = df_rfq["grade"].str.lower().str.strip()
     df_ref["grade_clean"] = df_ref["Grade/Material"].str.lower().str.strip()
 
-    # === Join on cleaned grade
+    # Join on cleaned grade
     df_joined = df_rfq.merge(df_ref, how="left", on="grade_clean", suffixes=("", "_ref"))
 
-    # === Calculate midpoints for numeric comparisons
+    # Calculate midpoints for numeric comparisons
     df_joined["thickness_mid"] = df_joined[["thickness_min", "thickness_max"]].mean(axis=1)
     df_joined["width_mid"] = df_joined[["width_min", "width_max"]].mean(axis=1)
 
@@ -26,7 +26,7 @@ def prepare_rfq_reference(df_rfq: pd.DataFrame, df_ref: pd.DataFrame) -> pd.Data
     if "Yield strength (Re or Rp0.2)" in df_joined.columns:
         df_joined["yield_mid"] = df_joined["Yield strength (Re or Rp0.2)"]
 
-    # === Match flags for categorical columns (check existence)
+    # Match flags for categorical columns (check existence)
     df_joined["match_finish"] = (
         (df_joined["finish"] == df_joined["finish_ref"]).astype(int)
         if "finish_ref" in df_joined.columns else 0
@@ -36,7 +36,7 @@ def prepare_rfq_reference(df_rfq: pd.DataFrame, df_ref: pd.DataFrame) -> pd.Data
         if "form_ref" in df_joined.columns else 0
     )
 
-    # === Fill missing chem values (optional: median imputation or zeros)
+    # Fill missing chem values (optional: median imputation or zeros)
     chem_cols = [
         "Carbon (C)", "Manganese (Mn)", "Silicon (Si)",
         "Sulfur (S)", "Phosphorus (P)", "Aluminum (Al)"
@@ -55,7 +55,7 @@ def compute_similarity_top3(df_joined: pd.DataFrame) -> pd.DataFrame:
     """
     df = df_joined.copy()
 
-    # === Similarity features
+    # Similarity features
     df["iou_thickness"] = 1 - abs(df["thickness_mid"] - df["thickness_mid"].mean()) / df["thickness_mid"].max()
     df["iou_width"] = 1 - abs(df["width_mid"] - df["width_mid"].mean()) / df["width_mid"].max()
 
