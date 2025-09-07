@@ -26,7 +26,7 @@ def prepare_rfq_reference(df_rfq: pd.DataFrame, df_ref: pd.DataFrame) -> pd.Data
     if "Yield strength (Re or Rp0.2)" in df_joined.columns:
         df_joined["yield_mid"] = df_joined["Yield strength (Re or Rp0.2)"]
 
-    # Match flags for categorical columns (check existence)
+    # Match flags for categorical columns
     df_joined["match_finish"] = (
         (df_joined["finish"] == df_joined["finish_ref"]).astype(int)
         if "finish_ref" in df_joined.columns else 0
@@ -36,7 +36,7 @@ def prepare_rfq_reference(df_rfq: pd.DataFrame, df_ref: pd.DataFrame) -> pd.Data
         if "form_ref" in df_joined.columns else 0
     )
 
-    # Fill missing chem values (optional: median imputation or zeros)
+    # Fill missing chem values with median
     chem_cols = [
         "Carbon (C)", "Manganese (Mn)", "Silicon (Si)",
         "Sulfur (S)", "Phosphorus (P)", "Aluminum (Al)"
