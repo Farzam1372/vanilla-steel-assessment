@@ -54,7 +54,7 @@ vanilla-steel-assessment/
 python run.py
 ```
 
-### ▶️ Option 2: Run notebooks step-by-step
+###  Option 2: Run notebooks step-by-step
 
 - `scripts/notebooks/combine.ipynb` → Task A
 - `scripts/notebooks/RFQ Similarity.ipynb` → Task B
